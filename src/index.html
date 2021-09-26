@@ -1,12 +1,81 @@
 <html>
-    <head>
-    </head>
-    <body>
-        <div class="reveal">
-            <div class="slides">
-                <section>slide 1</section>
-                <section>slide 2</section>
-            </div>
-        </div>
-    </body>
+  <head> 
+      <title>JSON transformations</title>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="transformers-slam-dunk.gif">
+          <h1 class="r-fit-text" style="text-align: left; color: lightgrey">JSON <br /><span style="color: orangered;">transformations</span></h1>
+          <hr color="orange"/>
+          <h4 style="text-align: right; color: orange;">An open source tale<h4/>
+        </section>
+        <section>
+            <h2 style="color: lightgrey; text-align: left;">Contents</h2>
+            <hr color="orangered" />
+            <ol style="color: lightgrey;">
+                <li>Motivation</li>
+                <li>Our Use Case</li>
+                <li>Existing tools</li>
+                <li>Principle of <a href="https://www.npmjs.com/package/@perpk/json-xform" target="_blank">@kperp/json-xform</a></li>
+                <li>QA and Code Management</li>
+            </ol>
+        </section>
+        <section>
+          <section>
+            <h1 style="color: lightgrey; text-align: left;">Motivation</h1>
+            <hr color="orangered" />
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">General examples</h2>
+            <hr color="orangered" />
+            <ul>
+              <li>Entity to DTO</li>
+              <li>XML via XSLT</li>
+              <li>Denormalization in Relational DBs</li>
+              <li>...</li>
+            </ul>
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">JSON examples</h2>
+            <hr color="orangered" />
+            <ul>
+              <li>Due to UI demands not met by API data</li>
+              <li>Filter out unwanted information</li>
+              <li>Restructuring as a way to simplify things</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1 style="color: lightgrey; text-align: left;">Our Use Case</h1>
+            <hr color="orangered" />
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">To simplify and throw away...</h2>
+            <hr color="orangered" />
+            <ul>
+              <li>Large reports generated from security scanners</li>
+              <li>Need to transform from various tools into a common format</li>
+              <li>Common format to be processed further in CI workflow</li>
+              <li>Inforation should be picked àla Carte</li>
+              <li>'Denormalize' nesting</li>
+            </ul>
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">Overview</h2>
+            <hr color="orangered" />
+            <img src="concept-overview.jpg" />
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1 style="color: lightgrey; text-align: left;">Existing tools</h1>
+            <hr color="orangered" />
+          </section>
+          <section></section>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>
