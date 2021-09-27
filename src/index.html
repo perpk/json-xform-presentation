@@ -1,6 +1,7 @@
 <html>
   <head> 
-      <title>JSON transformations</title>
+      <link rel="icon" href="https://cdn4.iconfinder.com/data/icons/proglyphs-free/512/Autobot-512.png" type="image/x-icon" />
+      <title>JSON transformations</title> 
   </head>
   <body>
     <div class="reveal">
@@ -10,7 +11,7 @@
           <hr color="orange"/>
           <h4 style="text-align: right; color: orange;">An open source tale<h4/>
         </section>
-        <section>
+        <section data-background-image="library.gif">
             <h2 style="color: lightgrey; text-align: left;">Contents</h2>
             <hr color="orangered" />
             <ol style="color: lightgrey;">
@@ -22,7 +23,7 @@
             </ol>
         </section>
         <section>
-          <section>
+          <section data-background-image="motivation.gif">
             <h1 style="color: lightgrey; text-align: left;">Motivation</h1>
             <hr color="orangered" />
           </section>
@@ -47,7 +48,7 @@
           </section>
         </section>
         <section>
-          <section>
+          <section data-background-image="usecase.gif">
             <h1 style="color: lightgrey; text-align: left;">Our Use Case</h1>
             <hr color="orangered" />
           </section>
@@ -63,17 +64,368 @@
             </ul>
           </section>
           <section>
-            <h2 style="color: orange; text-align: left;">Overview</h2>
+            <h2 style="color: orange; text-align: left;">It looks like this...</h2>
             <hr color="orangered" />
             <img src="concept-overview.jpg" />
           </section>
+          <section data-background-image="must-all-fmj.gif">
+            <h2 style="color: orange; text-align: left;">But why bother?</h2>
+            <hr color="orangered" />
+            <ul>
+              <li>Changes in JSON file structure must <strong>not</strong> lead to code changes!</li>
+              <li>Onboarding new tools which produce JSON must <strong>not</strong> lead to code changes!</li>
+              <li>Transforming to a common format <strong>must</strong> be externally possible!</li>
+            </ul>
+          </section>
         </section>
         <section>
-          <section>
+          <section data-background-image="tools.gif">
             <h1 style="color: lightgrey; text-align: left;">Existing tools</h1>
             <hr color="orangered" />
           </section>
-          <section></section>
+          <section>
+
+            <h2 style="color: orange; text-align: left;">
+              <a href="https://www.npmjs.com/package/node-json-transform">
+                node-json-transform
+              </a>
+              </h2>
+              <hr color="orangered" />
+
+              <ul style="list-style-type: none;">
+                <li style="color:green"> + External template</li>
+                <li style="color:green"> + Lots of weekly downloads > 5.000</li>
+                <li style="color:green"> + Broad feature set</li>
+                <li><br /></li>
+                <li style="color:red"> - Complexity</li>
+              </ul>
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              <a href="https://www.npmjs.com/package/json-to-json-transformer" target="_blank">
+                json-to-json-transformer
+              </a>
+            </h2>
+            <hr color="orangered" />
+            <ul style="list-style-type: none;">
+              <li style="color:green"> + External template</li>
+              <li style="color:green"> + Date formatting</li>
+              <li><br /></li>
+              <li style="color:red"> - Not that much use - weekly ~50 downloads</li>
+            </ul>
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              <a href="https://www.npmjs.com/package/@guscrawford.com/json-xform" target="_blank">
+                @guscrawford.com/json-xform
+              </a>
+            </h2>
+            <hr color="orangered" />
+            <ul style="list-style-type: none;">
+              <li style="color:green"> + Cool features like sorting of JSON data</li>
+              <li><br /></li>
+              <li style="color:red"> - Not that much use - weekly ~16 downloads</li>
+              <li style="color:red"> - Complexity</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+            <section data-background-image="bruce-lee.gif">
+              <h2 style="color: orange; text-align: left;">
+                <a href="https://www.npmjs.com/package/@perpk/json-xform" target="_blank">
+                  @kperp/json-xform
+                </a>
+              </h2>
+              <hr color="orangered" />
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              Principles
+            </h2>
+            <hr color="orangered" />
+            <ol>
+              <li>The DSL (template) should have the smallest possible vocabulary</li>
+              <li>It should be easy to grasp</li>
+              <li>Template should be provided externally</li>
+              <li>Easy access on nested properties</li>
+            </ol>
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              Building blocks
+            </h2>
+            <hr color="orangered" />
+            <h4 style="color: lightgray; text-align: right;">
+              built on solid ground
+            </h4>
+            <ul style="list-style-type:square;">
+              <li>
+                <a href="https://www.npmjs.com/package/jsonpath" target="_blank">
+                  jsonpath
+                </a>
+                to query inside the source JSON
+                <ul style="list-style-type: none;">
+                  <li>> 500k downloads per week</li>
+                </ul>
+              </li>
+              <li>
+                <a href="" target="_blank">
+                  jsonschema
+                </a>
+                to validate the template dsl
+                <ul style="list-style-type: none;">
+                  <li>> 1M downloads per week</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              Mapping DSL
+            </h2>
+            <hr color="orangered" />
+            <h4 style="color: lightgray; text-align: right;">
+              It all starts with a fieldset
+            </h4>
+            <pre>
+              <code>
+{
+  fieldset: [
+    {
+      from: "source field to take data from",
+      to: "target field to take data to (optional)"
+    }
+  ]
+}
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              Mapping DSL
+            </h2>
+            <hr color="orangered" />
+            <h4 style="color: lightgray; text-align: right;">
+              Iterating arrays
+            </h4>
+            <pre>
+              <code>
+{
+  fromEach: {
+    field: "The name of the array in the source",
+    to: "The name of the array in the target (optional)",
+    fieldset: [
+      {
+        from: "object property in source array",
+        to: "object property in the target array (optional)"
+      }
+    ]
+  }
+}
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              Mapping DSL
+            </h2>
+            <hr color="orangered" />
+            <h4 style="color: lightgray; text-align: right;">
+              Deep access I
+            </h4>
+            <pre>
+              <code>
+{
+  fieldset: [
+    {
+      from: "top.middle.bottom",
+      to: "top"
+    }
+  ]
+}
+              </code>
+            </pre>
+            <p style="font-size: medium; text-align: right; margin-right: 3em;">
+              <a href="https://runkit.com/perpk/6152186c9b4acf0008bcb25e" target="_blank">
+                Try on RunKit
+              </a>
+            </p>
+            </section>
+            <section>
+            <h2 style="color: orange; text-align: left;">
+              Mapping DSL
+            </h2>
+            <hr color="orangered" />
+            <h4 style="color: lightgray; text-align: right;">
+              Deep access II
+            </h4>
+            <pre>
+              <code>
+{
+  fieldset: [
+    {
+      from: "top"
+      to: "top.middle.bottom"
+    }
+  ]
+}
+              </code>
+            </pre>
+            <p style="font-size: medium; text-align: right; margin-right: 3em;">
+              <a href="https://runkit.com/perpk/61521a018cc9ee000893b2e0" target="_blank">
+                Try on RunKit
+              </a>
+            </p>
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              Mapping DSL
+            </h2>
+            <hr color="orangered" />
+            <h4 style="color: lightgray; text-align: right;">
+              Deep access in array data
+            </h4>
+            <pre>
+              <code>
+{
+  fieldset: [
+    {
+      from: 'root.0.branches.0.moreBranches.1.branchFive',
+      to: 'five'
+    }
+  ]
+}
+              </code>
+            </pre>  
+            <p style="font-size: medium; text-align: right; margin-right: 3em;">
+              <a href="https://runkit.com/perpk/6152213c6392b500087f1a2c" target="_blank">
+                Try on RunKit
+              </a>
+            </p>          
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              Mapping DSL
+            </h2>
+            <hr color="orangered" />
+            <h4 style="color: lightgray; text-align: right;">
+              Destructure nesting by flattening
+            </h4>
+            <pre>
+              <code>
+{
+  fromEach: {
+    field: 'highLevel',
+    to: 'flat',
+    flatten: true,
+    fieldset: [
+      {
+        from: 'fieldOne'
+      },
+      {
+        from: 'fieldTwo'
+      },
+      {
+        fromEach: {
+          field: 'lowLevel',
+          fieldset: [
+            {
+              from: 'fieldThree'
+            },
+            {
+              from: 'fieldFour'
+            }
+          ]
+        }
+      }
+    ]
+  }
+}                
+              </code>
+            </pre>
+            <p style="font-size: medium; text-align: right; margin-right: 3em;">
+              <a href="https://runkit.com/perpk/61521c209b4acf0008bcb4aa" target="_blank">
+                Try on RunKit
+              </a>
+            </p>
+          </section>
+        </section>
+        <section>
+          <section data-background-image="code-management.gif">
+            <h2 style="color: lightgrey; text-align: left;">Code Management & QA</h2>
+            <hr color="orangered" />
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              Code Management
+            </h2>
+            <hr color="orangered" />
+            <ul style="list-style-type: square;">
+              <li>
+                Publicly hosted on 
+                <a href="https://github.com/perpk/json-xform" target="_blank">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/perpk/json-xform/blob/main/.github/workflows/tests.yaml" target="_blank">
+                  Build
+                </a>
+                and 
+                <a href="https://github.com/perpk/json-xform/blob/main/.github/workflows/publish.yaml" target="_blank">
+                  published 
+                </a>
+                via 
+                <a href="https://github.com/features/actions" target="_blank">
+                  GitHub Actions
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/perpk/json-xform/runs/3575296104?check_suite_focus=true" target="_blank">
+                  Tests 
+                </a>                
+                via 
+                <a href="https://mochajs.org/" target="_blank">
+                  Mocha
+                </a>
+                and 
+                <a href="https://www.chaijs.com/" target="_blank">
+                  Chai
+                </a>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2 style="color: orange; text-align: left;">
+              Quality Assurance
+            </h2>
+            <hr color="orangered" />
+            <ul style="list-style-type: square;">
+              <li>44 Tests</li>
+              <li>94% Coverage</li>
+              <li>No known issues :/</li>
+              <li>
+                <a href="https://github.com/perpk/json-xform/issues" target="_blank">
+                  A few features and changes
+                </a>
+                to be implemented in releases 1.1.0 & 1.2.0
+              </li>
+            </ul>
+            <br />
+            <p style="text-align: left; color: tomato;">
+              Whoever is interested, you're welcome to contribute :D
+            </p>
+          </section>
+        </section>
+        <section data-background-image="thanks.gif">
+          <h2 style="color: lightgrey; text-align: left;">
+            Thank you very much!
+          </h2>
+          <hr color="orangered" />
+          <h4 style="text-align: right; color:lightgray">
+            <br />
+            Questions?
+          </h4>
         </section>
       </div>
     </div>
